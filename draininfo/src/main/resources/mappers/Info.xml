@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.drainInfo.domain.InfoRespository">
+	 	<select id="getSearch"  parameterType="hashmap" resultType="com.web.drainInfo.domain.MapData">
+			SELECT 
+				*
+			FROM 
+				tb_draininfo
+			WHERE
+				<choose>		
+				
+					<when test='type.equals("all")'> 	
+						data_num > 0	
+					</when>    						
+					<when test='type.equals("name")'> 	
+						office_nm LIKE CONCAT('%',#{searchName},'%')
+					</when>    
+					<when test='type.equals("address")'> 	
+						road_nm LIKE CONCAT('%',#{searchName},'%')
+					</when>  
+					
+				</choose>
+			ORDER BY
+			<choose>
+				<when test='sort.equals("all")'> 	
+					data_num ASC
+				</when>  
+										
+			</choose>  		
+	</select>
+</mapper>

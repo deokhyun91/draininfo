@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.drainInfo.domain.BoardRespository">
+	 	<insert id="saveBoard" parameterType="com.web.drainInfo.domain.BoardEntity">
+		  insert into
+		  	 	tb_board
+		  values(
+		  		0,
+		  		#{user_id},
+		  		#{name},
+		  		#{title}, 
+		  		#{content}, 
+		  		now(),
+		  		now()
+		  		);
+		  	
+	  </insert>
+	  
+	  
+	  <select id="getBoard" resultType="com.web.drainInfo.domain.BoardEntity">
+		  select
+		  	 *
+		  from
+		 	 tb_board
+		  ORDER BY
+		  	 num DESC
+	  </select>
+	  
+	  <update id="updateBoard" parameterType="com.web.drainInfo.domain.BoardEntity">
+	  		UPDATE
+				tb_board
+			SET
+				name = #{name}, 
+		  		title = #{title},
+		  		content = #{content}, 
+				update_day = NOW()
+			WHERE
+				num = #{num};
+	  </update>
+	  <delete id="deleteBoard" parameterType="Integer">
+			DELETE
+			FROM
+				tb_board
+			WHERE
+				num = #{num};
+	  </delete>
+</mapper>
